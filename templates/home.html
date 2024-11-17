@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seja bem-vindo ao METIS</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.min.css">
+    <style>
+        :root{
+            --main-color-font: #0D0D0D;
+            --maint-color-navbar: #04BF55;
+            --main-background-color: #F2F2F2;
+            --main-hover-color: #B5D99C;
+            --main-subcolor: #81D959;
+        } 
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: var(--main-background-color);
+            color: var(--main-color-font);
+            font-size: 16px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+            font-style: normal;
+            font-weight: normal;
+            min-width: 320px;
+            height: 100vh;
+        }
+        section{
+            padding: auto;
+            margin: 50px;
+            max-width: 1320px;
+        }
+        @media (max-width: 450px) {
+            section{
+                margin: auto;
+            }
+            body{
+                font-size: 12px;
+                min-width: 320px;
+            }
+        }
+        h2{
+            text-align: center;
+        }
+        .fa-solid{
+            color: var(--main-background-color);
+        }
+        /*SOMENTE NAVBAR*/
+        .navbar ul{
+            display: flex;
+            list-style: none;
+            width: 100%;
+            background-color: var(--maint-color-navbar);
+            font-size: 20px;
+            max-height: 65px;
+            padding: 5px 0;
+            justify-content: center;
+        }
+        @media(max-width: 450px){
+            .navbar ul{
+                font-size: 12px;
+            }
+        }
+        .navbar li a{
+            padding: 0 5px;
+            text-decoration: none;
+            color: var(--main-background-color);
+        }
+        .navbar a:hover{
+            background-color: var(--main-hover-color);
+            color :var(--main-color-font);
+            border-radius: 5px;
+            margin: 12px;
+
+        }
+        /*SOMENTE ROW/CONTAINER*/
+        .container h4 {
+            padding: 15px 0;
+            text-align: center;
+        }
+        .container-mid h4 {
+            padding: 15px 0;
+            text-align: center;
+        }
+        .special h4 {
+            padding: 15px 0;
+            text-align: center;
+        }
+        .container-mid ul{
+            padding : 10px 25px;
+        }
+        .container ul{
+            padding : 10px 25px;
+        }
+        .container p{
+            padding : 0px 25px;
+        }
+        .special ul{
+            padding : 10px 25px;
+        }
+        .row{
+            display: flex;
+        }
+        div.container{
+            width: 100%;
+            background-color: var(--main-subcolor);
+            margin: 10px;
+            border-radius: 50px 50px 5px 5px
+        }
+        div.container-mid{
+            width: 100%;
+            margin: 10px;
+        }
+        div.special{
+
+            width: 400px;
+            height: 100%;
+            background-color: var(--main-subcolor);
+            margin: auto;
+            border-radius: 50px 50px 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!--BARRA DE NAVEGAÇÃO DO SITE-->
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <a href="/login_paciente">
+                        <!--AREA RESERVADA PARA O LOGIN DO PACIENTE-->
+                        <i class="fa-solid fa-hospital-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/login_medico">
+                        <!--AREA RESERVADA PARA O LOGIN DO MEDICO-->
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about">
+                        Sobre nós
+                    </a>
+                </li>
+                <li>
+                    <a href="#funciona">
+                        Funcionalidades
+                    </a>
+                </li>
+                <li>
+                    <a href="#object">
+                        Nosso objetivo
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <section id="about">
+        <!--AREA RESERVADA PARA EXPLICAR SOBRE O METIS-->
+        <h2>Conheça o MÉTIS</h2>
+        <p>Cuidando da sua saúde</p>
+    </section>
+    <section id="funciona">
+        <div  >
+            <h2>Principal funcionalidades do METIS</h2>
+        </div>
+        <div class="row">
+            <!--EXPLICAR SOBRE AS PRINCIPAIS FUNCIONALIDADES DO METIS-->
+            <div class="container">
+                <h4>Cadastro e Acesso do Paciente</h4>
+                <p>
+                    O medico pode  cadastrar facilmente o paciente na plataforma.<br>
+                    Cadastro de consultas e exames, e informações de saude.<br>
+                </p>
+            </div>
+            <div class="container-mid">
+                <h4>Controle de Receitas Médicas</h4>
+                <ul>
+                    <li>
+                        <p>Cadastro de Receitas pelo Médico:<br>
+                            O médico pode registrar receitas diretamente na plataforma,
+                            incluindo informações como nome do medicamento, dosagem, quantidade e instruções.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Cadastro de Receitas pelo Médico:<br>
+                            O médico pode registrar receitas diretamente na plataforma,
+                            incluindo informações como nome do medicamento, dosagem, quantidade e instruções.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Dados de Validade das Receitas:<br>
+                            O sistema alerta o paciente sobre a validade da receita, lembrando-o de renovar quando necessário.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <h4>Gerenciamento de Medicamentos</h4>
+                <ul>
+                    <li>
+                        <p>
+                            Horários de Medicamentos:<br>
+                            O paciente pode visualizar os horários específicos de cada medicamento, conforme a prescrição médica.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Lembretes Automáticos:<br>
+                            Notificações automáticas e-mail são enviadas para lembrar o paciente de tomar o medicamento na hora correta.</p>
+                    </li>
+                    <li>
+                        <p>
+                            Marcação de Medicamento Tomado:<br>
+                            O paciente pode marcar quando tomou o medicamento, criando um histórico de adesão ao tratamento.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <!--SECTION 2 PARA AS FUNCIONALIDADES-->
+            <div class="container">
+                <h4>Agendamento de Consultas e Retornos</h4>
+                <ul>
+                    <li>
+                        <p>
+                            Agendamento de Consultas:<br>
+                            O paciente pode visualizar e agendar consultas futuras diretamente na plataforma, com detalhes sobre o médico e o local da consulta.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Lembretes de Consultas:<br>
+                            A plataforma envia lembretes para que o paciente não se esqueça de comparecer à consulta agendada.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Histórico de Consultas:<br>
+                            O paciente pode acessar o histórico de consultas realizadas, com detalhes como dados, médico que atendeu e o motivo da consulta.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="container-mid">
+                <h4>Histórico de Saúde e Prontuários</h4>
+                <ul>
+                    <li>
+                        <p>
+                            Armazenamento de Prontuários Médicos:<br>
+                            O sistema armazena todos os prontuários médicos, com registros de diagnósticos, prescrições, exames realizados e observações dos médicos.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Documentos e Exames Anexados:<br>
+                            O paciente pode anexar documentos, como exames e laudos médicos, para ter um histórico completo de sua saúde.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Acesso Fácil ao Histórico:<br>
+                            O paciente pode visualizar o histórico de saúde de forma simples, com opções de pesquisa por dados ou tipo de atendimento.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <h4>Painel de Controle</h4>
+                <ul>
+                    <li>
+                        <p>
+                            Resumo Geral da Saúde: <br>
+                            O painel exibe uma visão geral da saúde do paciente, com informações como medicamentos ativos, consultas próximas e históricos de adesão aos tratamentos.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Indicadores de Adesão ao Tratamento:<br>
+                            Uma plataforma gera indicadores (como gráficos ou tabelas) para mostrar o quanto o paciente está aderindo ao tratamento, com base nos horários dos medicamentos e nas consultas realizadas.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="special">
+                <h4>Acessibilidade e Facilidade de Uso</h4>
+                <ul>
+                    <li>
+                        <p>
+                            Interface Intuitiva:<br>
+                            O design da plataforma é simples e fácil de navegar, com ícones grandes, texto legível e menus claros, pensado para pessoas com pouca experiência em tecnologia.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Acessibilidade:<br>
+                            A plataforma oferece recursos como ajuste de tamanho de fonte e suporte a leitores de tela para garantir que todos os pacientes, independentemente de suas necessidades, possam usar o sistema de forma eficiente.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Tutoriais e Suporte:
+                            Disponibilidade de tutoriais em vídeo ou texto para ajudar o paciente a usar a plataforma. Também há uma central de ajuda e suporte técnico acessível para resolver dúvidas.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="object" class="final">
+        <h2>Nosso objetivo</h2>
+        <p>
+            O principal objetivo do Métis é transformar e simplificar o cuidado como a saúde dos seus usuários pensando nisso o Métis foi desenvolvido como uma plataforma simples e prática que elimina o acesso de pessoas com pouco conhecimento tecnológico tornando saúde e informação acessível para todos, com um design simples e funcionalidades diretas a plataforma permite que os usuários com pouca experiência tecnologia possam registrar, consultar e organizar informações importantes como receitas, horários de medicamentos e o seu prontuário.
+        </p>
+    </section>
+    <footer>
+        <h6>Desenvolvido por estudantes da UDF</h6>
+    </footer>
+    <script>
+
+    </script>
+</body>
+</html>
