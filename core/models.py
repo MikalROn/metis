@@ -1,42 +1,85 @@
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser, Group, Permission, BaseUserManager
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+
+
+class CustomUserManager(BaseUserManager):
+    """
+    Gerenciador personalizado para o modelo Usuario.
+    Usa CPF como identificador único para autenticação.
+    """
+    def create_user(self, cpf, password=None, **extra_fields):
+        if not cpf:
+            raise ValueError("O campo CPF é obrigatório.")
+        extra_fields.setdefault('is_active', True)
+        user = self.model(cpf=cpf, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+
+    def create_superuser(self, cpf, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superusuários precisam ter is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superusuários precisam ter is_superuser=True.')
+
+        return self.create_user(cpf, password, **extra_fields)
 
 
 class Usuario(AbstractUser):
-    # Campos adicionais para todos os usuários
-    cpf = models.CharField(max_length=11, unique=True, null=True, blank=True)
-    telefone = models.CharField(max_length=15, null=True, blank=True)
+    username = None  # Remove o campo padrão de username
+    first_name = None  # Remove o primeiro nome
+    last_name = None  # Remove o sobrenome
 
-    # Tipo de usuário (opcional, pode usar os grupos do Django também)
-    TIPO_USUARIO_CHOICES = (
-        ('medico', 'Médico'),
-        ('paciente', 'Paciente'),
+    # Campos personalizados
+    cpf = models.CharField(
+        max_length=11,
+        unique=True,
+        null=False,
+        blank=False,
+        verbose_name=_("CPF")
     )
-    tipo_usuario = models.CharField(max_length=10, choices=TIPO_USUARIO_CHOICES)
+    nome = models.CharField(max_length=100, verbose_name=_("Nome"))
 
     # Relacionamento com grupos e permissões
     groups = models.ManyToManyField(Group, related_name="usuario_groups", blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name="usuario_permissions", blank=True)
 
-    def save(self, *args, **kwargs):
-        # Adicionar o usuário ao grupo correspondente automaticamente
-        if not self.pk:  # Apenas ao criar
-            if self.tipo_usuario == 'medico':
-                grupo, _ = Group.objects.get_or_create(name='Medico')
-                self.groups.add(grupo)
-            elif self.tipo_usuario == 'paciente':
-                grupo, _ = Group.objects.get_or_create(name='Paciente')
-                self.groups.add(grupo)
-        super().save(*args, **kwargs)
+    # Configuração do gerenciador
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = 'cpf'  # CPF será usado como identificador único
+    REQUIRED_FIELDS = ['nome']
+
+    def __str__(self):
+        return f"{self.nome} ({self.cpf})"
 
 
 class Medico(Usuario):
     especialidade = models.CharField(max_length=100)
     crm = models.CharField(max_length=20, unique=True)
+    
+    class Meta:
+        verbose_name = "Médico"
+        verbose_name_plural = "Médicos"
+    
+    def __str__(self):
+        return self.nome
 
 
 class Paciente(Usuario):
     data_nascimento = models.DateField()
+    medico_responsavel  = models.ForeignKey(
+        Medico,
+        on_delete=models.CASCADE,
+        related_name="pacientes",  # Nome único para evitar conflito
+        verbose_name=_("Médico responsável")
+    )
 
 
 class Medicacao(models.Model):
@@ -53,6 +96,12 @@ class Prontuario(models.Model):
     arquivo = models.FileField(upload_to='prontuarios/')
     data = models.DateField()
 
+class Receita(models.Model):
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name="receitas")
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name="receitas")
+    data_emissao = models.DateField()
+    descricao = models.TextField()
+    documento = models.FileField(upload_to='receitas/')
 
 class Consulta(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name="consultas")

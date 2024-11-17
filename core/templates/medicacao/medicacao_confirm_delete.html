@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Confirmar Exclusão{% endblock %}
+{% block content %}
+    <h1>Confirmar Exclusão</h1>
+    <p>Tem certeza de que deseja excluir a medicação "{{ object.dosagem }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+    </form>
+    <a href="{% url 'medicacao_list' %}">Cancelar</a>
+{% endblock %}

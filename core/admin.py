@@ -1,39 +1,39 @@
 from django.contrib import admin
-from .models import Usuario, Medico, Paciente, Medicacao, Prontuario, Consulta
+from django.contrib.auth.admin import UserAdmin
+from .models import Usuario, Medico
 
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('username', 'cpf', 'telefone', 'tipo_usuario')
-    search_fields = ('username', 'cpf')
+class UsuarioAdmin(UserAdmin):
+    model = Usuario
+    # Personaliza os campos que aparecerão no formulário de edição
+    fieldsets = (
+        (None, {'fields': ('cpf', 'nome', 'password')}),
+        ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+    )
+    # Campos a serem exibidos na lista do Admin
+    list_display = ('cpf', 'nome', 'is_staff', 'is_active')
 
-class MedicoAdmin(admin.ModelAdmin):
-    list_display = ('usuario_display', 'especialidade', 'crm')  # Alterado para método
-    search_fields = ('usuario__username', 'crm')
+    # Oculta os campos desnecessários
+    exclude = ('last_login', 'date_joined', 'groups', 'user_permissions')
 
-    def usuario_display(self, obj):
-        return obj.usuario.username  # Acessando o campo 'username' do usuário relacionado
-    usuario_display.short_description = 'Medico'
+    # Define como o campo de senha será tratado
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('cpf', 'nome', 'password1', 'password2'),
+        }),
+    )
 
-class PacienteAdmin(admin.ModelAdmin):
-    list_display = ('usuario_display', 'data_nascimento')  # Alterado para método
-    search_fields = ('usuario__username',)
+    # Corrigir a ordenação para um campo válido, como 'cpf'
+    ordering = ('cpf',)  # Ordenando pelo campo 'cpf'
 
-    def usuario_display(self, obj):
-        return obj.usuario.username  # Acessando o campo 'username' do usuário relacionado
-    usuario_display.short_description = 'Paciente'
-
-class MedicacaoAdmin(admin.ModelAdmin):
-    list_display = ('data_validade', 'horario', 'dosagem', 'agenda')
-
-class ProntuarioAdmin(admin.ModelAdmin):
-    list_display = ('paciente', 'medico', 'data', 'arquivo')
-
-class ConsultaAdmin(admin.ModelAdmin):
-    list_display = ('paciente', 'medico', 'data', 'horario', 'especialidade')
-
-# Registrando as classes no admin
+# Registrando o modelo Usuario com o administrador personalizado
 admin.site.register(Usuario, UsuarioAdmin)
-admin.site.register(Medico, MedicoAdmin)
-admin.site.register(Paciente, PacienteAdmin)
-admin.site.register(Medicacao, MedicacaoAdmin)
-admin.site.register(Prontuario, ProntuarioAdmin)
-admin.site.register(Consulta, ConsultaAdmin)
+
+# Registrando o modelo Medico para o Admin
+@admin.register(Medico)
+class MedicoAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'cpf', 'especialidade', 'crm')
+    search_fields = ('nome', 'cpf', 'crm')
+    ordering = ('crm',)  # Ordenando pelo campo 'crm'
+    
+    exclude = ('last_login', 'date_joined', 'groups', 'user_permissions')

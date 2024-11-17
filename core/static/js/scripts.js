@@ -1,0 +1,1 @@
+// Aqui vão os scripts do site no geral 

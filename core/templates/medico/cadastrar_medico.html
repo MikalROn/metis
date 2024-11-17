@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="PT-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MÉTIS|Obrigado por retornar</title>
+{% extends "_base.html" %}
+
+{% block title %}Cadastro Médico{% endblock %}
+
+{% block content %}
     <style>
         :root{
             --main-color-font: #0D0D0D;
@@ -68,7 +67,7 @@
         }
         input{
             margin: 2.5px;
-            width: 350px;
+            width: 100%;
             height: 5vh;
             padding: 5px;
             border: 1px solid var(--main-subcolor);
@@ -103,31 +102,23 @@
             align-items: center;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <!--PAGINA APENAS PARA O CADASTRO DOS MEDICOS NA PLATAFOMRA-->
-        <div class="first-column">
-            <h2 class="titulo2">Vamos começar?</h2>
-            <p class="descri1">Espero que não tenha sentido saudades!</p>
-            <p class="descri1">Ansioso para começar?</p>
-            <button class="btn btn1"><a href="/login_medico">Fazer login</a></button>
-        </div>
-        <div class="second-column">
-            <h2 class="titulo">Crie sua conta na MÉTIS</h2>
-            <p class="descri2">Precisamos de apenas alguns dados</p>
-            <form action="" method="post"> 
-                <!--FORMULARIO DE CADASTRO DO MEDICO NA PLATAFORMA-->
-                <input type="text" name="nomeMedico" placeholder="Digite o nome completo">
-                <input type="text" name="especialidade" placeholder="Informe sua Especialidade">
-                <input type="text" name="clinica"placeholder="Informe a clinica">
-                <input type="text" name="cidClinica" id="Cidade-clinica" placeholder="Em qual cidade esta sua clinica?">
-                <input type="text" name="idCRM" placeholder="Qual seu CRM?">
-                <input type="tel" name="telMedico" placeholder="Digite um numero de telefone valido">
-                <input type="password" name="senhaMedico" placeholder="Informe uma senha!">
-                <input class="btn btn2" type="submit" value="Enviar Cadastro" >
-            </form>
-        </div>
+
+<div class="container">
+    <!-- Página apenas para o cadastro dos médicos na plataforma -->
+    <div class="first-column">
+        <h2 class="titulo2">Vamos começar?</h2>
+        <p class="descri1">Espero que não tenha sentido saudades!</p>
+        <p class="descri1">Ansioso para começar?</p>
+        <button class="btn btn1"><a href="{% url 'login' %}">Fazer login</a></button>
     </div>
-</body>
-</html>
+    <div class="second-column">
+        <h2 class="titulo">Crie sua conta na MÉTIS</h2>
+        <p class="descri2">Precisamos de apenas alguns dados</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn2" type="submit" value="Enviar Cadastro">
+        </form>
+    </div>
+</div>
+{% endblock %}

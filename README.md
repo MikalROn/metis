@@ -21,8 +21,12 @@ pip install -r requirements.txt
 
 ## Como rodar
 
- Apos instaladas todas as depêndencias inicie o seguinte arquivo:
+ Apos instaladas todas as depêndencias, use o seguinte comando para rodar o projeto em modo de desenvolvimento:
 
 ```shell
 python manage.py runserver
 ```
+`
+## Ajuda 
+
+Caso tenha dúvida do para que serve alguma pasta, ou etc, procure na pasta o arquivo `info.md`.
