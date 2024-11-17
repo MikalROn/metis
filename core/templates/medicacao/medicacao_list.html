@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Medicações{% endblock %}
+{% block content %}
+    <h1>Lista de Medicações</h1>
+    <ul>
+        {% for medicacao in medicacoes %}
+            <li><a href="{% url 'medicacao_detail' medicacao.pk %}">{{ medicacao.dosagem }} - {{ medicacao.horario }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'medicacao_create' %}">Adicionar Medicação</a>
+{% endblock %}

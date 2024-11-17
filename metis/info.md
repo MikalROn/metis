@@ -1,0 +1,1 @@
+Esta parte é a parte principal do projeto onde vão configurações de deploy e configurações gerais do projeto
