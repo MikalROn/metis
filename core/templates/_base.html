@@ -1,0 +1,23 @@
+<!-- Este é o template base para todos os outros -->
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.min.css">
+
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <footer>
+        <h6>Desenvolvido por estudantes da UDF</h6>
+    </footer>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
