@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-
 class CustomUserManager(BaseUserManager):
     """
     Gerenciador personalizado para o modelo Usuario.
@@ -17,7 +16,6 @@ class CustomUserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-
 
     def create_superuser(self, cpf, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
@@ -74,7 +72,7 @@ class Medico(Usuario):
 
 class Paciente(Usuario):
     data_nascimento = models.DateField()
-    medico_responsavel  = models.ForeignKey(
+    medico_responsavel = models.ForeignKey(
         Medico,
         on_delete=models.CASCADE,
         related_name="pacientes",  # Nome único para evitar conflito
@@ -83,11 +81,14 @@ class Paciente(Usuario):
 
 
 class Medicacao(models.Model):
-    data_validade = models.DateField()
-    horario = models.TimeField()
-    dosagem = models.CharField(max_length=50)
-    agenda = models.CharField(max_length=100)
-    receita = models.FileField(upload_to='receitas/')
+    data_validade = models.DateField(verbose_name="Data de Validade")
+    horario = models.TimeField(verbose_name="Horário")
+    dosagem = models.CharField(max_length=100, verbose_name="Dosagem")
+    data_agendada = models.DateField(verbose_name="Data Agendada")
+    receita = models.FileField(upload_to='receitas/', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.dosagem} - {self.horario} (Validade: {self.data_validade})"
 
 
 class Prontuario(models.Model):
@@ -96,12 +97,14 @@ class Prontuario(models.Model):
     arquivo = models.FileField(upload_to='prontuarios/')
     data = models.DateField()
 
+
 class Receita(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name="receitas")
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name="receitas")
     data_emissao = models.DateField()
     descricao = models.TextField()
     documento = models.FileField(upload_to='receitas/')
+
 
 class Consulta(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name="consultas")

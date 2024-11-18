@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
-{% block title %}Lista de Medicações{% endblock %}
 {% block content %}
-    <h1>Lista de Medicações</h1>
-    <ul>
-        {% for medicacao in medicacoes %}
-            <li><a href="{% url 'medicacao_detail' medicacao.pk %}">{{ medicacao.dosagem }} - {{ medicacao.horario }}</a></li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'medicacao_create' %}">Adicionar Medicação</a>
+<h1>Lista de Medicações</h1>
+<table>
+    <tr>
+        <th>Data de Validade</th>
+        <th>Horário</th>
+        <th>Dosagem</th>
+        <th>Data Agendada</th>
+        <th>Ações</th>
+    </tr>
+    {% for medicacao in medicacoes %}
+    <tr>
+        <td>{{ medicacao.data_validade }}</td>
+        <td>{{ medicacao.horario }}</td>
+        <td>{{ medicacao.dosagem }}</td>
+        <td>{{ medicacao.data_agendada }}</td>
+        <td>
+            <a href="{% url 'medicacao_detail' medicacao.pk %}">Detalhes</a> |
+            <a href="{% url 'medicacao_update' medicacao.pk %}">Editar</a> |
+            <a href="{% url 'medicacao_delete' medicacao.pk %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'medicacao_create' %}">Nova Medicação</a>
 {% endblock %}
