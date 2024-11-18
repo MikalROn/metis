@@ -117,27 +117,27 @@ class ConsultaDeleteView(DeleteView):
 ###############################
 class PacienteListView(ListView):
     model = Paciente
-    template_name = 'paciente_list.html'
+    template_name = 'paciente/paciente_list.html'
 
 class PacienteDetailView(DetailView):
     model = Paciente
-    template_name = 'paciente_detail.html'
+    template_name = 'paciente/paciente_detail.html'
 
 class PacienteCreateView(CreateView):
     model = Paciente
     fields = '__all__'
-    template_name = 'paciente_form.html'
+    template_name = 'paciente/paciente_form.html'
     success_url = reverse_lazy('paciente_list')
 
 class PacienteUpdateView(UpdateView):
     model = Paciente
     fields = '__all__'
-    template_name = 'paciente_form.html'
+    template_name = 'paciente/paciente_form.html'
     success_url = reverse_lazy('paciente_list')
 
 class PacienteDeleteView(DeleteView):
     model = Paciente
-    template_name = 'paciente_confirm_delete.html'
+    template_name = 'paciente/paciente_confirm_delete.html'
     success_url = reverse_lazy('paciente_list')
 
 ################################

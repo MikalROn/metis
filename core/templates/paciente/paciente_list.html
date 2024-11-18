@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+
+{% block content %}
+  <h1>Pacientes</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Data de Nascimento</th>
+        <th>Médico Responsável</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for paciente in object_list %}
+        <tr>
+          <td>{{ paciente.nome }}</td>
+          <td>{{ paciente.data_nascimento }}</td>
+          <td>{{ paciente.medico_responsavel }}</td>
+          <td>
+            <a href="{% url 'paciente_detail' paciente.pk %}">Detalhes</a>
+            <a href="{% url 'paciente_update' paciente.pk %}">Editar</a>
+            <a href="{% url 'paciente_delete' paciente.pk %}">Excluir</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'paciente_create' %}">Adicionar Novo Paciente</a>
+{% endblock %}
