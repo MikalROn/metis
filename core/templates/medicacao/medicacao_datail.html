@@ -1,13 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Detalhes da Medicação{% endblock %}
 {% block content %}
-    <h1>Detalhes da Medicação</h1>
-    <p>Data de Validade: {{ object.data_validade }}</p>
-    <p>Horário: {{ object.horario }}</p>
-    <p>Dosagem: {{ object.dosagem }}</p>
-    <p>Agenda: {{ object.agenda }}</p>
-    <p>Receita: <a href="{{ object.receita.url }}">Baixar Receita</a></p>
-    <a href="{% url 'medicacao_update' object.pk %}">Editar</a> |
-    <a href="{% url 'medicacao_delete' object.pk %}">Deletar</a> |
-    <a href="{% url 'medicacao_list' %}">Voltar</a>
+<h1>Detalhes da Medicação</h1>
+<p><strong>Data de Validade:</strong> {{ object.data_validade }}</p>
+<p><strong>Horário:</strong> {{ object.horario }}</p>
+<p><strong>Dosagem:</strong> {{ object.dosagem }}</p>
+<p><strong>Data Agendada:</strong> {{ object.data_agendada }}</p>
+<a href="{% url 'medicacao_list' %}">Voltar</a>
 {% endblock %}

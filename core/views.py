@@ -196,6 +196,9 @@ class MedicoDeleteView(DeleteView):
     template_name = 'medico_confirm_delete.html'
     success_url = reverse_lazy('medico_list')
 
+################################
+# Médicação
+###############################
 class MedicacaoListView(ListView):
     model = Medicacao
     template_name = 'medicacao/medicacao_list.html'
@@ -216,6 +219,36 @@ class MedicacaoUpdateView(UpdateView):
     fields = ['data_validade', 'horario', 'dosagem', 'agenda', 'receita']
     template_name = 'medicacao/medicacao_form.html'
     success_url = reverse_lazy('medicacao_list')
+
+class MedicacaoDeleteView(DeleteView):
+    model = Medicacao
+    template_name = 'medicacao/medicacao_confirm_delete.html'
+    success_url = reverse_lazy('medicacao_list')
+    
+class MedicacaoListView(ListView):
+    model = Medicacao
+    template_name = 'medicacao/medicacao_list.html'
+    context_object_name = 'medicacoes'
+
+
+class MedicacaoDetailView(DetailView):
+    model = Medicacao
+    template_name = 'medicacao/medicacao_detail.html'
+
+
+class MedicacaoCreateView(CreateView):
+    model = Medicacao
+    fields = ['data_validade', 'horario', 'dosagem', 'data_agendada']
+    template_name = 'medicacao/medicacao_form.html'
+    success_url = reverse_lazy('medicacao_list')
+
+
+class MedicacaoUpdateView(UpdateView):
+    model = Medicacao
+    fields = ['data_validade', 'horario', 'dosagem', 'data_agendada']
+    template_name = 'medicacao/medicacao_form.html'
+    success_url = reverse_lazy('medicacao_list')
+
 
 class MedicacaoDeleteView(DeleteView):
     model = Medicacao
