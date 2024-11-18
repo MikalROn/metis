@@ -27,6 +27,16 @@ class DashboardMedicoView(TemplateView):
         if not hasattr(request.user, 'medico'): 
             return HttpResponseForbidden("Você não tem permissão para acessar esta página.")
         return super().dispatch(request, *args, **kwargs)
+
+@method_decorator(login_required, name='dispatch')
+class DashboardPacienteView(TemplateView):
+    template_name = 'dashboard_paciente.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        # Verifica se o usuário tem o atributo 'paciente', caso contrário, retorna acesso proibido.
+        if not hasattr(request.user, 'paciente'):
+            return HttpResponseForbidden("Você não tem permissão para acessar esta página.")
+        return super().dispatch(request, *args, **kwargs)
      
 
 class CadastroMedicoView(SuccessMessageMixin, CreateView):

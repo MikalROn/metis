@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     
     path('cadastrar-medico/', views.CadastroMedicoView.as_view(), name='cadastrar_medico'),
-    path('dashboard-medico/', views.DashboardMedicoView.as_view(), name='dashboard_medico')
-
+    path('dashboard-medico/', views.DashboardMedicoView.as_view(), name='dashboard_medico'),
+    path('dashboard-paciente', views.DashboardPacienteView.as_view(), name='dashboard_paciente')
 
 ]
