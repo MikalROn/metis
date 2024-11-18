@@ -33,7 +33,7 @@ class CadastroMedicoView(SuccessMessageMixin, CreateView):
     model = Medico
     form_class = MedicoForm
     template_name = 'medico/cadastrar_medico.html'
-    success_url = reverse_lazy('cadastrar_medioco')  
+    success_url = reverse_lazy('cadastrar_medico')  
     success_message = "Médico cadastrado com sucesso!"
 
     def form_valid(self, form):
